@@ -1,0 +1,13 @@
+<!-- <link rel="stylesheet" href="/stylesheets/partials.css" /> -->
+<nav>
+  <h1 id="nav-header">Cookbook</h1>
+  <a href="/">home</a>
+  <% if(user) { %>
+      <a href="/users/<%=user._id%>/recipes"
+        >View my recipes</a>
+      <a href="/auth/sign-out">Sign Out</a>
+  <% } else { %>
+      <a href="/auth/sign-in">Sign In</a>
+      <a href="/auth/sign-up">Sign Up</a>
+  <% } %>
+</nav>

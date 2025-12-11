@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Recipes</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Your Recipes</h1>
+    <ul>
+      <% recipes.forEach((recipe)=>{ %>
+     
+        <li><%= recipe.name %></li>
+      </a>
+      <% }) %>
+    </ul>
+    <a href="/recipes/new">Add new recipe</a>
+  </body>
+</html>
+
+
+    <!-- <a href="/users/<%=user._id%>/recipes/new">Add a recipe</a> -->
