@@ -1,0 +1,32 @@
+<!-- views/listings/show.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= recipe.owner.username %>'s <%= recipe.name %> recipe</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1><%= recipe.owner.username %>'s <%= recipe.name %> recipe</h1>
+
+    <p>Ingredients: <% recipe.ingredients.forEach((ingredient, index) => {%>
+      <%= ingredient.name %><%= recipe.ingredients.length - index == 1 ? null : ',' %>
+      <% }) %>
+    </p>
+    <p>Instructions: <%= recipe.instructions %></p>
+
+    <% if (recipe.owner._id.equals(user._id)) { %>
+        <a href="/recipes/<%= recipe._id %>/edit">Edit this recipe</a>
+        <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete this recipe</button>
+        </form>
+    <% } else { %>
+        <p></p>
+    <% } %>
+    </body>
+
+  </body>
+</html>

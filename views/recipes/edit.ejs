@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit <%= recipe.name %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+  <h1>Edit your <%= recipe.name %> recipe</h1>
+    <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+      <p>
+        <label for="name">Recipe name:</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<%= fields && fields.name ? fields.name : recipe.name %>"
+        /><br>
+
+        <label for="instructions">Instructions:</label>
+        <textarea
+          name="instructions"
+          id="instructions"
+          ><%= fields && fields.instructions ? fields.instructions : recipe.instructions %></textarea>
+        <br>
+
+        <label for="ingredients">Ingredients:</label>
+        <% if (ingredients.length > 0) { %>
+          <select name="ingredients" id="ingredients" multiple>
+          <% for (let ingredient of ingredients) { %>
+            <option value="<%= ingredient._id %>"
+            <%= selectedIngredients &&
+                selectedIngredients.includes(ingredient._id.toString())
+                  ? 'selected' : '' %>
+              ><%= ingredient.name %></option>
+          <% } %>
+          </select>
+        <%} else { %>
+          You haven't added to your list of ingredients yet.
+        <% } %>
+        <br>
+        
+        <input type="hidden" name="redirectTo" value="/recipes/<%= recipe._id %>/edit">
+
+        <button type="submit">Edit Recipe</button>
+      </p>
+      <p>
+        <label for="ingredientName">Ingredient name:</label>
+        <input type="text" name="ingredientName" id="ingredientName" />
+
+        <button type="submit" formaction="/ingredients">Add Ingredient</button>
+        <button type="submit" formaction="/ingredients/delete?_method=DELETE">Delete Ingredient</button>
+      </p>
+    </form>
+  </body>
+</html>
